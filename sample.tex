@@ -1,0 +1,54 @@
+\documentclass[openright]{nkuthesis}
+%%%%选项列表%%%%
+% continum------------用于图表及公式的连续编号（章节无关）
+% openright,openany---缺省为openany，用openright可保证每章在奇数页开始，打印时可选
+% oneside,twoside-----缺省为twoside，双面格式，注意此项与openright相抵消
+% appnum--------------附录参与计数
+\usepackage[]{nkuthesistitle} %用LaTeX生成封面
+%%%%选项列表%%%%
+% dualdegree----------双学位选项，生成双学位用封面
+\begin{document}
+
+% 用户信息
+\include{main/1_info}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 封面
+\frontmatter
+\maketitle
+
+% 声明页
+\pagestyle{empty}
+\cleardoublepage
+\announce
+
+% 摘要
+\cleardoublepage
+\setcounter{page}{1}
+\pagestyle{plain}
+\include{main/2_abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 目录
+\tableofcontents
+
+% 正文样式
+\mainbody
+
+% 正文
+\include{main/3_chapter1_intro}
+\include{main/3_chapter2_chexample}
+\include{main/3_chapter3_engexample}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 附录
+\appendix
+\include{main/4_appendix}
+
+% 参考文献
+\include{main/5_reference}
+
+% 致谢
+\include{main/6_acknowledgement}
+
+\end{document}

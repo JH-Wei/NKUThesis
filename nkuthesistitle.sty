@@ -1,0 +1,102 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{nkuthesistitle}
+              [2016/04/24 v0.1
+Package for title pages]
+%%%%%%%%%% package options %%%%%%%%%%
+\newif\ifnku@dualdegree\nku@dualdegreefalse
+\DeclareOption{dualdegree}{\nku@dualdegreetrue}
+\ProcessOptions\relax
+
+\RequirePackage{amsmath,amssymb,amsfonts,mathrsfs,bm}
+\RequirePackage{ctexsize} %用于中文文档的字体字号
+\RequirePackage{tabu}
+\RequirePackage{geometry}
+
+\newgeometry{
+    top=0cm, bottom=0cm, left=3.9cm, right=3.9cm,
+}
+\savegeometry{covergeometry}
+
+\newcommand{\frontcover}{
+    \begin{titlepage}
+        \begin{center}
+            \vspace*{3.1cm}
+            \centerline{\fontsize{35pt}{0pt}\selectfont \textbf{\songti 南~~开~~大~~学}}
+            \vskip 0.98cm
+            \centerline{\zihao{2} 本~科~生~毕~业~论~文~（设~计）}
+            \ifnku@dualdegree
+                \vskip 0.3cm
+                \centerline{\zihao{3} （双学位专用）}
+                \vskip 1.35cm
+            \else
+                \vskip 2.43cm
+            \fi
+            \begingroup
+            \renewcommand*{\arraystretch}{1.2}
+            \begin{minipage}[h]{\textwidth}
+            \begin{center}
+            \zihao{4}
+            \begin{tabu} to \textwidth{c X[3,c]}
+                中文题目：  &  \nku@thesistitlechn  \\
+                英文题目：  &  \nku@thesistitleeng  \\
+            \end{tabu}
+            \end{center}
+            \end{minipage}
+            \ifnku@dualdegree
+            \vskip 0.75cm
+            \else
+            \vskip 2cm
+            \fi            
+            {
+                \zihao{4}
+                \begin{tabular}{cc}
+                    学~~~~~~~~号： & \nku@studentID    \\ \cline{2-2}
+                    姓~~~~~~~~名： & \nku@thesisauthor \\ \cline{2-2}
+                    年~~~~~~~~级： & \nku@grade        \\ \cline{2-2}
+                    专~~~~~~~~业： & \nku@major        \\ \cline{2-2}
+                    系~~~~~~~~别： & \nku@department   \\ \cline{2-2}
+                    学~~~~~~~~院： & \nku@school       \\ \cline{2-2}
+                    \ifnku@dualdegree
+                    双修专业：  & \nku@dualmajor \\ \cline{2-2}
+                    双修院系：  & \nku@dualschool\\ \cline{2-2}                                       
+                    \fi
+                    指导教师：  &  \nku@teacher  \\ \cline{2-2}
+                    完成日期：  &  ~~~\nku@thesisendyear ~年~ \nku@thesisendmonth ~月~ \nku@thesisendday ~日 ~~~\\ \cline{2-2}
+                \end{tabular}
+            }
+            \endgroup
+        \end{center}
+    \end{titlepage}
+}
+
+\newcommand{\announce}{%
+    \newpage
+    \vspace*{54bp}
+    \centerline{\bf\zihao{3} 关于南开大学本科生毕业论文（设计）的声明}
+    \zihao{-4}
+    \vskip 1cm
+本人郑重声明：所呈交的学位论文，是本人在指导教师指导下，进行研究工作所取得的成果。除文中已经注明引用的内容外，本学位论文的研究成果不包含任何他人创作的、已公开发表或没有公开发表的作品内容。对本论文所涉及的研究工作做出贡献的其他个人和集体，均已在文中以明确方式标明。本学位论文原创性声明的法律责任由本人承担。\par
+    \vskip 2.5cm
+    \hfill
+    \begin{tabular}{cl}
+        学位论文作者签字：&\\
+        & \nku@thesisdateyear~年~\nku@thesisdatemonth ~月~\nku@thesisdateday~日
+    \end{tabular}
+    \vskip 3cm
+    \zihao{-4}
+    本人声明：该学位论文是本人指导学生完成的研究成果，已经审阅过论文的全部内容，并能够保证题目、关键词、摘要部分中英文内容的一致性和准确性。
+    \vskip 2.5cm
+    \hfill
+    \begin{tabular}{cl}
+        学位论文指导教师签名：&\\
+        & \nku@thesisdateyear~年~\nku@thesisdatemonth ~月~\nku@thesisdateday~日
+    \end{tabular}
+}
+
+% 重定义maketitle
+
+\renewcommand{\maketitle}{%
+    \loadgeometry{covergeometry}
+    \frontcover
+    \loadgeometry{maingeometry}
+}
